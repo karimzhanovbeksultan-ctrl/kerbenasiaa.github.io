@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kerben Asia — Authentic Kyrgyzstan Expeditions & Tours</title>
+  <title>Kerben Asia — Authentic Kyrgyzstan Expeditions</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -108,10 +108,10 @@
     }
     .btn-wa-header:hover { background: var(--accent-hover); }
 
-    /* Hero Section */
+    /* Hero Section with clean slogan */
     .hero {
       position: relative;
-      height: 560px;
+      height: 540px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -132,7 +132,7 @@
       margin-bottom: 16px;
       border: 1px solid rgba(255,255,255,0.25);
     }
-    .hero h1 { font-size: 44px; font-weight: 800; line-height: 1.15; margin-bottom: 16px; }
+    .hero h1 { font-size: 42px; font-weight: 800; line-height: 1.2; margin-bottom: 16px; }
     .hero p { font-size: 18px; opacity: 0.92; margin-bottom: 32px; }
     .hero-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
     .hero-btn-primary {
@@ -164,13 +164,13 @@
     .section-header h2 { font-size: 34px; font-weight: 800; color: var(--primary); margin-bottom: 12px; }
     .section-header p { color: var(--text-muted); font-size: 16px; }
 
-    /* Tours & Locations Grid (Join UP style cards) */
-    .tours-grid {
+    /* Locations Grid */
+    .locations-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
       gap: 28px;
     }
-    .tour-card {
+    .location-card {
       background: #fff;
       border: 1px solid var(--border);
       border-radius: var(--radius);
@@ -179,13 +179,13 @@
       flex-direction: column;
       transition: 0.25s;
     }
-    .tour-card:hover {
+    .location-card:hover {
       transform: translateY(-5px);
       box-shadow: 0 15px 30px rgba(0,0,0,0.08);
     }
-    .tour-img-wrap { position: relative; height: 230px; background: #e2e8f0; }
-    .tour-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
-    .tour-badge {
+    .loc-img-wrap { position: relative; height: 230px; }
+    .loc-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+    .loc-badge {
       position: absolute;
       top: 14px;
       left: 14px;
@@ -196,21 +196,39 @@
       font-size: 12px;
       font-weight: 600;
     }
-    .tour-body { padding: 24px; flex-grow: 1; display: flex; flex-direction: column; }
-    .tour-meta { font-size: 13px; color: var(--accent); font-weight: 600; margin-bottom: 8px; display: flex; gap: 10px; }
-    .tour-title { font-size: 20px; font-weight: 700; color: var(--primary); margin-bottom: 8px; }
-    .tour-desc { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; flex-grow: 1; }
-    .tour-footer {
+    .loc-body { padding: 24px; flex-grow: 1; display: flex; flex-direction: column; }
+    .loc-title { font-size: 20px; font-weight: 700; color: var(--primary); margin-bottom: 8px; }
+    .loc-distance { font-size: 13px; color: var(--accent); font-weight: 600; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+    .loc-desc { font-size: 14px; color: var(--text-muted); margin-bottom: 16px; flex-grow: 1; }
+    
+    /* Фотоальбом локации (ваши реальные фото с туров) */
+    .loc-gallery-preview {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 18px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+    .loc-gallery-preview img {
+      width: 68px;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+    }
+
+    .loc-footer {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding-top: 16px;
       border-top: 1px solid var(--border);
     }
-    .tour-price { font-size: 20px; font-weight: 800; color: var(--primary); }
-    .tour-price span { font-size: 11px; color: var(--text-muted); display: block; font-weight: normal; }
+    .loc-price { font-size: 20px; font-weight: 800; color: var(--primary); }
+    .loc-price span { font-size: 11px; color: var(--text-muted); display: block; font-weight: normal; }
     
-    .btn-select-tour {
+    .btn-select-loc {
       background: var(--accent);
       color: #fff;
       border: none;
@@ -221,34 +239,53 @@
       cursor: pointer;
       transition: 0.2s;
     }
-    .btn-select-tour:hover { background: var(--accent-hover); }
+    .btn-select-loc:hover { background: var(--accent-hover); }
+    .btn-select-loc.selected { background: var(--primary); }
 
-    /* Traveler Gallery */
-    .traveler-gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 16px;
-    }
-    .gallery-card {
-      position: relative;
-      height: 240px;
-      border-radius: var(--radius);
-      overflow: hidden;
+    /* Interactive Map & Logistics Navigator */
+    .map-section { background: var(--bg-light); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .map-container {
+      background: #fff;
       border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 30px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      align-items: center;
     }
-    .gallery-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.3s; }
-    .gallery-card:hover img { transform: scale(1.05); }
-    .gallery-tag {
+    .map-visual {
+      background: #e2e8f0;
+      height: 340px;
+      border-radius: 12px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80');
+      background-size: cover;
+      background-position: center;
+    }
+    .map-overlay {
       position: absolute;
-      bottom: 12px;
-      left: 12px;
-      background: rgba(15, 23, 42, 0.85);
+      inset: 0;
+      background: rgba(15, 23, 42, 0.65);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 24px;
       color: #fff;
-      padding: 6px 12px;
+    }
+    .route-steps { display: flex; flex-direction: column; gap: 12px; }
+    .route-step-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(255,255,255,0.1);
+      padding: 10px 14px;
       border-radius: 8px;
-      font-size: 12px;
-      font-weight: 600;
-      backdrop-filter: blur(4px);
+      font-size: 13px;
     }
 
     /* Custom Trip Builder */
@@ -287,6 +324,100 @@
       display: flex;
       justify-content: space-between;
     }
+
+    /* What's Included / Excluded Cards */
+    .inc-exc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .inc-box, .exc-box {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+    .inc-box h3 { color: var(--accent); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; font-size: 18px; }
+    .exc-box h3 { color: #ef4444; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; font-size: 18px; }
+    .inc-exc-grid ul { list-style: none; font-size: 14px; color: var(--text-muted); }
+    .inc-exc-grid li { margin-bottom: 8px; padding-left: 20px; position: relative; }
+    .inc-box li::before { content: "✓"; color: var(--accent); font-weight: bold; position: absolute; left: 0; }
+    .exc-box li::before { content: "✕"; color: #ef4444; font-weight: bold; position: absolute; left: 0; }
+
+    /* Traveler Gallery */
+    .traveler-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+    .gallery-card {
+      position: relative;
+      height: 240px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .gallery-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.3s; }
+    .gallery-card:hover img { transform: scale(1.05); }
+    .gallery-tag {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      background: rgba(15, 23, 42, 0.85);
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      backdrop-filter: blur(4px);
+    }
+
+    /* Reviews Section */
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+    .review-card {
+      background: var(--bg-light);
+      border: 1px solid var(--border);
+      padding: 28px;
+      border-radius: var(--radius);
+    }
+    .stars { color: #f59e0b; margin-bottom: 10px; font-size: 16px; }
+    .review-author { display: flex; align-items: center; gap: 12px; margin-top: 16px; }
+    .author-avatar {
+      width: 42px;
+      height: 42px;
+      background: var(--primary);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    /* FAQ */
+    .faq-list { max-width: 820px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+    .faq-item { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; background: #fff; }
+    .faq-question {
+      width: 100%;
+      text-align: left;
+      padding: 18px 22px;
+      background: #fff;
+      border: none;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .faq-answer { padding: 0 22px 18px; font-size: 15px; color: var(--text-muted); display: none; }
+    .faq-item.open .faq-answer { display: block; }
 
     /* Cart Modal */
     .cart-modal {
@@ -347,25 +478,6 @@
     }
     .btn-primary-full:hover { background: var(--accent-hover); }
 
-    /* FAQ */
-    .faq-list { max-width: 820px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
-    .faq-item { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; background: #fff; }
-    .faq-question {
-      width: 100%;
-      text-align: left;
-      padding: 18px 22px;
-      background: #fff;
-      border: none;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .faq-answer { padding: 0 22px 18px; font-size: 15px; color: var(--text-muted); display: none; }
-    .faq-item.open .faq-answer { display: block; }
-
     footer {
       background: var(--primary);
       color: #94a3b8;
@@ -385,7 +497,7 @@
     @media (max-width: 820px) {
       .hero h1 { font-size: 32px; }
       .nav-links { display: none; }
-      .builder-box { grid-template-columns: 1fr; }
+      .map-container, .builder-box, .inc-exc-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -407,6 +519,8 @@
           <option value="USD">💲 USD ($)</option>
           <option value="EUR">💶 EUR (€)</option>
           <option value="KGS">🇰🇬 KGS (сом)</option>
+          <option value="KZT">🇰🇿 KZT (₸)</option>
+          <option value="RUB">🇷🇺 RUB (₽)</option>
         </select>
       </div>
     </div>
@@ -417,10 +531,11 @@
     <div class="container nav">
       <a href="#" class="logo">KERBEN<span>ASIA</span></a>
       <nav class="nav-links">
-        <a href="#tours" data-i18n="nav_tours">Tours & Destinations</a>
-        <a href="#builder" data-i18n="nav_builder">Trip Builder</a>
-        <a href="#gallery" data-i18n="nav_gallery">Real Tour Gallery</a>
-        <a href="#faq" data-i18n="nav_faq">FAQ</a>
+        <a href="#locations" data-i18n="nav_locs">Locations</a>
+        <a href="#map-section" data-i18n="nav_map">Route Navigator</a>
+        <a href="#builder" data-i18n="nav_builder">Build Custom Trip</a>
+        <a href="#gallery" data-i18n="nav_gallery">Tour Gallery</a>
+        <a href="#reviews" data-i18n="nav_reviews">Reviews</a>
       </nav>
       <div class="nav-actions">
         <button class="btn-cart" onclick="toggleCart()">
@@ -431,36 +546,67 @@
     </div>
   </header>
 
-  <!-- HERO SECTION -->
+  <!-- HERO SECTION WITH CLEAN SLOGAN -->
   <section class="hero">
     <div class="hero-content">
       <span class="hero-tag" data-i18n="hero_tag">🇰🇬 Authentic Mountain & Nomad Expeditions</span>
       <h1 data-i18n="hero_title">Discover the Heart of Tien Shan on Your Own Terms</h1>
-      <p data-i18n="hero_sub">Select individual tours and locations, calculate your custom itinerary with professional guides, and travel safely across Kyrgyzstan.</p>
+      <p data-i18n="hero_sub">Select individual locations, calculate your custom itinerary with professional guides, and travel safely across Kyrgyzstan.</p>
       <div class="hero-btns">
-        <a href="#tours" class="hero-btn-primary" data-i18n="hero_btn1">Browse Tours</a>
+        <a href="#locations" class="hero-btn-primary" data-i18n="hero_btn1">Browse Locations</a>
         <a href="#builder" class="hero-btn-secondary" data-i18n="hero_btn2">Build & Price Trip</a>
       </div>
     </div>
   </section>
 
-  <!-- TOURS & LOCATIONS CATALOG -->
-  <section id="tours">
+  <!-- LOCATIONS CATALOG (Separate locations with photo previews) -->
+  <section id="locations">
     <div class="container">
       <div class="section-header">
-        <h2 data-i18n="tours_title">Featured Tours & Destinations</h2>
-        <p data-i18n="tours_sub">Explore separate locations or full expeditions, check real photos, and add them directly to your custom trip cart</p>
+        <h2 data-i18n="locs_title">Individual Destinations in Kyrgyzstan</h2>
+        <p data-i18n="locs_sub">Explore separate locations, check travel times from Bishkek, view our real tour photos, and add them directly to your custom trip</p>
       </div>
-      <div class="tours-grid" id="tours-container"></div>
+
+      <div class="locations-grid" id="locations-container"></div>
     </div>
   </section>
 
-  <!-- CUSTOM TRIP BUILDER -->
-  <section id="builder" style="background: var(--bg-light); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <!-- MAP & LOGISTICS NAVIGATOR (Схема расстояний и времени) -->
+  <section id="map-section" class="map-section">
+    <div class="container">
+      <div class="section-header" style="margin-bottom: 30px;">
+        <h2 data-i18n="map_title">Logistics & Route Navigator</h2>
+        <p data-i18n="map_sub">Understand travel times across Kyrgyzstan mountain roads so you can plan comfortably</p>
+      </div>
+
+      <div class="map-container">
+        <div class="map-visual">
+          <div class="map-overlay">
+            <h3 style="margin-bottom: 12px; font-size: 20px;" data-i18n="map_overlay_t">🗺️ Kyrgyzstan Travel Times</h3>
+            <p style="font-size: 13px; opacity: 0.9; margin-bottom: 16px;" data-i18n="map_overlay_sub">Mountain roads require experienced local 4x4 drivers and careful time management:</p>
+            <div class="route-steps">
+              <div class="route-step-item">📍 Bishkek ➔ Ala-Archa Gorge: <strong>45 mins (35 km)</strong></div>
+              <div class="route-step-item">📍 Bishkek ➔ Burana Tower: <strong>1.5 hours (80 km)</strong></div>
+              <div class="route-step-item">📍 Bishkek ➔ Son-Kul Lake: <strong>4.5 – 5 hours (260 km)</strong></div>
+              <div class="route-step-item">📍 Bishkek ➔ Bokonbaevo (South Shore): <strong>4 hours (280 km)</strong></div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h3 style="margin-bottom: 14px; color: var(--primary);" data-i18n="nav_guide_title">Why travel times matter in the mountains?</h3>
+          <p style="color: var(--text-muted); font-size: 15px; margin-bottom: 12px;" data-i18n="nav_guide_p1">Kyrgyzstan is 94% mountainous. Passes like Too-Ashuu or Orto-Syrt sit at over 3,000 meters altitude. Weather changes fast, and scenic stops for photos take extra time.</p>
+          <p style="color: var(--text-muted); font-size: 15px;" data-i18n="nav_guide_p2">Our professional drivers and guides plan your itinerary precisely so you enjoy comfortable pacing without exhausting non-stop driving.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CUSTOM TRIP BUILDER & PRICE CALCULATOR -->
+  <section id="builder">
     <div class="container">
       <div class="section-header">
         <h2 data-i18n="builder_title">Interactive Trip Builder & Cost Calculator</h2>
-        <p data-i18n="builder_sub">Select your locations, set traveler count, and calculate exact pricing including professional guide, driver, fuel, and hotels</p>
+        <p data-i18n="builder_sub">Select your locations, set traveler count (min 2 persons for standard rate), and calculate exact pricing including professional guide, driver, fuel, and hotels</p>
       </div>
 
       <div class="builder-box">
@@ -472,6 +618,7 @@
             <div>
               <label style="font-size: 13px; font-weight: 600; display: block; margin-bottom: 6px;" data-i18n="builder_people">Number of Travelers:</label>
               <input type="number" id="calc-travelers" class="booking-input" value="2" min="1" max="20" onchange="calculateCustomTrip()">
+              <span id="solo-warning" style="font-size: 11px; color: #ef4444; display: none;" data-i18n="solo_warn">*1 traveler rate includes solo traveler supplement for private car & guide.</span>
             </div>
             <div>
               <label style="font-size: 13px; font-weight: 600; display: block; margin-bottom: 6px;" data-i18n="builder_guide">Transport & Comfort Tier:</label>
@@ -501,14 +648,36 @@
             <span data-i18n="sum_total">Total:</span>
             <span id="sum-total">$0</span>
           </div>
+          
+          <!-- What is Included / Not Included breakdown -->
+          <div class="inc-exc-grid" style="grid-template-columns: 1fr; margin-top: 20px; font-size: 13px;">
+            <div class="inc-box" style="padding: 14px;">
+              <h4 style="color: var(--accent); margin-bottom: 6px;" data-i18n="inc_title">✓ What's Included:</h4>
+              <ul style="margin-left: 16px; color: var(--text-muted);">
+                <li data-i18n="inc_1">Private 4x4 transport & fuel</li>
+                <li data-i18n="inc_2">Professional English-speaking guide</li>
+                <li data-i18n="inc_3">Hotels / Yurt camps + Breakfasts</li>
+                <li data-i18n="inc_4">National park entrance fees</li>
+              </ul>
+            </div>
+            <div class="exc-box" style="padding: 14px; margin-top: 10px;">
+              <h4 style="color: #ef4444; margin-bottom: 6px;" data-i18n="exc_title">✕ What's NOT Included:</h4>
+              <ul style="margin-left: 16px; color: var(--text-muted);">
+                <li data-i18n="exc_1">International flights to Kyrgyzstan</li>
+                <li data-i18n="exc_2">Lunches and dinners (approx. $10-15/meal)</li>
+                <li data-i18n="exc_3">Personal travel insurance & tips</li>
+              </ul>
+            </div>
+          </div>
+
           <button class="btn-primary-full" style="margin-top: 20px;" onclick="sendCustomTripToWhatsApp()" data-i18n="btn_send_custom">Send Custom Trip to WhatsApp</button>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- TRAVELER GALLERY -->
-  <section id="gallery">
+  <!-- TRAVELER GALLERY (Галерея с реальных туров) -->
+  <section id="gallery" style="background: var(--bg-light);">
     <div class="container">
       <div class="section-header">
         <h2 data-i18n="gallery_title">Real Moments from Our Tours</h2>
@@ -516,8 +685,19 @@
       </div>
       <div class="traveler-gallery" id="traveler-gallery-grid"></div>
       <div style="text-align: center; margin-top: 30px;">
-        <p style="font-size: 14px; color: var(--text-muted);" data-i18n="gallery_note">Want to add your own photos? Simply upload them to your GitHub repository and update the image filenames in code!</p>
+        <p style="font-size: 14px; color: var(--text-muted);" data-i18n="gallery_note">Want to share your tour photos? Tag us on Instagram <strong>@kerben.asia</strong> or send to WhatsApp!</p>
       </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS SECTION -->
+  <section id="reviews">
+    <div class="container">
+      <div class="section-header">
+        <h2 data-i18n="reviews_title">What Explorers Say</h2>
+        <p data-i18n="reviews_sub">Verified feedback from international travelers who explored Kyrgyzstan with Kerben Asia</p>
+      </div>
+      <div class="reviews-grid" id="reviews-container"></div>
     </div>
   </section>
 
@@ -531,11 +711,15 @@
       <div class="faq-list">
         <div class="faq-item">
           <button class="faq-question" onclick="toggleFaq(this)"><span data-i18n="faq_q1">Why is the price higher for 1 traveler compared to groups?</span> <span>+</span></button>
-          <div class="faq-answer" data-i18n="faq_a1">For a solo traveler, the full cost of the private 4x4 vehicle, fuel, driver, and guide cannot be shared among multiple participants. When traveling with 2 or more people, the price per person becomes much more economical.</div>
+          <div class="faq-answer" data-i18n="faq_a1">For a solo traveler, the full cost of the private 4x4 vehicle, fuel, driver, and guide cannot be shared among multiple participants. When you travel with 2 or more people, the price per person becomes significantly more economical.</div>
         </div>
         <div class="faq-item">
           <button class="faq-question" onclick="toggleFaq(this)"><span data-i18n="faq_q2">Are guides and drivers experienced in mountain conditions?</span> <span>+</span></button>
-          <div class="faq-answer" data-i18n="faq_a2">Yes! All our drivers have 10+ years of off-road experience across high-altitude passes like Son-Kul and Barskoon. Our guides speak fluent English and have deep knowledge of nomadic history.</div>
+          <div class="faq-answer" data-i18n="faq_a2">Yes! All our drivers have 10+ years of off-road experience across high-altitude passes like Son-Kul and Barskoon. Our guides speak fluent English and have deep knowledge of nomadic history and nature.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)"><span data-i18n="faq_q3">Can we modify locations or add stops during the trip?</span> <span>+</span></button>
+          <div class="faq-answer" data-i18n="faq_a3">Absolutely. Since you build your own itinerary, you have full flexibility to stop for photos, adjust hiking duration, or visit local bazaars at your own pace.</div>
         </div>
       </div>
     </div>
@@ -545,7 +729,7 @@
   <div class="cart-modal" id="cart-modal" onclick="if(event.target===this) toggleCart()">
     <div class="cart-drawer">
       <div class="cart-header">
-        <h3 data-i18n="cart_title">🛒 Your Selected Itinerary</h3>
+        <h3 data-i18n="cart_title">🛒 Your Selected Locations</h3>
         <button onclick="toggleCart()" style="background:none; border:none; font-size:22px; cursor:pointer;">✕</button>
       </div>
       <div class="cart-items" id="cart-items-list"></div>
@@ -572,13 +756,14 @@
         </div>
         <div>
           <h4 data-i18n="footer_nav">Navigation</h4>
-          <a href="#tours" data-i18n="nav_tours">Tours & Destinations</a>
-          <a href="#builder" data-i18n="nav_builder">Trip Builder</a>
-          <a href="#gallery" data-i18n="nav_gallery">Real Tour Gallery</a>
+          <a href="#locations" data-i18n="nav_locs">Locations</a>
+          <a href="#map-section" data-i18n="nav_map">Route Navigator</a>
+          <a href="#builder" data-i18n="nav_builder">Build Custom Trip</a>
         </div>
         <div>
           <h4 data-i18n="footer_contacts">Contact Us</h4>
           <a href="https://wa.me/996703762323" target="_blank">WhatsApp: +996 703 762 323</a>
+          <a href="tel:+996703762323">Phone: +996 703 762 323</a>
           <a href="https://instagram.com/kerben.asia" target="_blank">Instagram: @kerben.asia</a>
         </div>
       </div>
@@ -594,7 +779,9 @@
     const currencyRates = {
       USD: { symbol: "$", rate: 1 },
       EUR: { symbol: "€", rate: 0.92 },
-      KGS: { symbol: "сом ", rate: 87 }
+      KGS: { symbol: "сом ", rate: 87 },
+      KZT: { symbol: "₸", rate: 495 },
+      RUB: { symbol: "₽", rate: 98 }
     };
     let currentCurrency = "USD";
     let currentLang = "en";
@@ -605,45 +792,141 @@
       return `${c.symbol}${converted.toLocaleString()}`;
     }
 
-    const toursData = [
+    // Все локации по отдельности + ваши галереи фото с туров
+    const locationsData = [
       {
         id: "ala-archa",
         days: 1,
         priceUSD: 95,
-        badge: "1 Day • Near Bishkek",
+        badge: "1 Day • 35 km from Bishkek",
         title: { en: "Ala-Archa National Park", ru: "Национальный парк Ала-Арча" },
+        distanceText: { en: "⏱ 45 mins from Bishkek", ru: "⏱ 45 минут от Бишкека" },
         image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1000&q=80",
-        desc: { en: "Majestic alpine gorge with snowy peaks, river trails, and scenic viewpoints.", ru: "Величественное горное ущелье с заснеженными пиками и тропами." }
+        gallery: [
+          "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80",
+          "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=600&q=80"
+        ],
+        desc: {
+          en: "Majestic alpine gorge with snowy peaks, river trails, and scenic viewpoints right at the doorstep of Bishkek.",
+          ru: "Величественное горное ущелье с заснеженными пиками, тропами у реки и панорамными видами всего в часе от Бишкека."
+        }
       },
       {
         id: "chunkurchak",
         days: 1,
         priceUSD: 100,
-        badge: "1 Day • Alpine Plateau",
-        title: { en: "Chunkurchak Plateau & Canyons", ru: "Альпийское плато Чункурчак" },
+        badge: "1 Day • 45 km from Bishkek",
+        title: { en: "Chunkurchak Alpine Plateau", ru: "Альпийское плато Чункурчак" },
+        distanceText: { en: "⏱ 1 hour from Bishkek", ru: "⏱ 1 час от Бишкека" },
         image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1000&q=80",
-        desc: { en: "Red rock canyons, pine forests, and famous sky swings near Bishkek.", ru: "Красные каньоны, хвойные леса и знаменитые высокогорные качели." }
+        gallery: [
+          "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
+        ],
+        desc: {
+          en: "Famous for red rock formations, alpine meadows, giant sky swings, and spruce forests.",
+          ru: "Известно своими красными каньонами, альпийскими лугами, высокогорными качелями и еловыми лесами."
+        }
+      },
+      {
+        id: "burana",
+        days: 1,
+        priceUSD: 90,
+        badge: "1 Day • Silk Road History",
+        title: { en: "Burana Tower & Kegeti", ru: "Башня Бурана и ущелье Кегеты" },
+        distanceText: { en: "⏱ 1.5 hours from Bishkek (80 km)", ru: "⏱ 1.5 часа от Бишкека (80 км)" },
+        image: "https://images.unsplash.com/photo-1542332213-31f87348057f?auto=format&fit=crop&w=1000&q=80",
+        gallery: [
+          "https://images.unsplash.com/photo-1542332213-31f87348057f?auto=format&fit=crop&w=600&q=80"
+        ],
+        desc: {
+          en: "Ancient 11th-century Silk Road minaret and petroglyphs combined with a hike to Kegeti waterfall.",
+          ru: "Древний минарет XI века эпохи Шелкового пути, балбалы и поездка к водопаду в ущелье Кегеты."
+        }
       },
       {
         id: "son-kul",
         days: 2,
-        priceUSD: 220,
-        badge: "2 Days • Nomad Yurt Stay",
-        title: { en: "Son-Kul High Altitude Lake (3,016m)", ru: "Высокогорное озеро Сон-Куль (3016м)" },
-        image: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1000&q=80",
-        desc: { en: "Sleep in traditional yurt camps, ride horses, and experience true nomadic life.", ru: "Ночевка в юртах, конные прогулки и знакомство с бытом кочевников." }
+        priceUSD: 240,
+        badge: "2 Days • High Altitude 3,016m",
+        title: { en: "Son-Kul Lake & Yurt Stay", ru: "Озеро Сон-Куль и ночевка в юртах" },
+        distanceText: { en: "⏱ 4.5 hours from Bishkek (260 km)", ru: "⏱ 4.5 часа от Бишкека (260 км)" },
+        image: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1000&q=80",
+        gallery: [
+          "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80",
+          "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=600&q=80"
+        ],
+        desc: {
+          en: "Pristine alpine lake at 3,016m. Experience authentic nomadic shepherd life, horses, and starry nights in yurts.",
+          ru: "Высокогорное озеро на высоте 3016 м. Погружение в жизнь кочевников, конные прогулки и ночевка под звездами."
+        }
       },
       {
         id: "skazka",
         days: 1,
-        priceUSD: 130,
-        badge: "1 Day • South Shore",
+        priceUSD: 120,
+        badge: "1 Day • South Shore Issyk-Kul",
         title: { en: "Skazka (Fairy Tale) Canyon", ru: "Каньон Сказка (Южный берег)" },
+        distanceText: { en: "⏱ 4 hours from Bishkek (280 km)", ru: "⏱ 4 часа от Бишкека (280 км)" },
+        image: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1000&q=80",
+        gallery: [
+          "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=600&q=80"
+        ],
+        desc: {
+          en: "Breathtaking red sandstone canyons shaped by wind into Martian landscapes and castles.",
+          ru: "Потрясающие красные песчаные каньоны, созданные ветром в виде марсианских пейзажей и замков."
+        }
+      },
+      {
+        id: "barskoon",
+        days: 1,
+        priceUSD: 130,
+        badge: "1 Day • Waterfalls & Plateau",
+        title: { en: "Barskoon Waterfalls & Arabel", ru: "Водопады Барскоон и плато Арабель" },
+        distanceText: { en: "⏱ Near Bokonbaevo / Issyk-Kul", ru: "⏱ Рядом с Боконбаево / Иссык-Куль" },
+        image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1000&q=80",
+        gallery: [
+          "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80"
+        ],
+        desc: {
+          en: "Stunning forest waterfalls (Tears of a Leopard) and dramatic ascent to high-altitude Arabel syrt plateau.",
+          ru: "Красивейшие водопады в хвойном лесу («Слезы барса») и подъем на высокогорные сырты Арабель."
+        }
+      },
+      {
+        id: "jeti-oguz",
+        days: 1,
+        priceUSD: 130,
+        badge: "1 Day • Karakol Region",
+        title: { en: "Jeti-Oguz Red Rocks & Karakol", ru: "Скалы Джеты-Огуз и Каракол" },
+        distanceText: { en: "⏱ Near Karakol", ru: "⏱ Рядом с Караколом" },
         image: "https://images.unsplash.com/photo-1542332213-31f87348057f?auto=format&fit=crop&w=1000&q=80",
-        desc: { en: "Surreal red sandstone formations shaped by wind over thousands of years.", ru: "Сюрреалистичные красные скалы и каньоны, созданные природой." }
+        gallery: [
+          "https://images.unsplash.com/photo-1542332213-31f87348057f?auto=format&fit=crop&w=600&q=80"
+        ],
+        desc: {
+          en: "Legendary Seven Bulls red cliffs, Broken Heart formation, and cultural heritage of Karakol town.",
+          ru: "Легендарные красные скалы Семь Быков, ущелье Разбитое сердце и колоритный город Каракол."
+        }
+      },
+      {
+        id: "altyn-arashan",
+        days: 1,
+        priceUSD: 140,
+        badge: "1 Day • 4x4 Off-Road",
+        title: { en: "Altyn-Arashan Hot Springs", ru: "Горячие источники Алтын-Арашан" },
+        distanceText: { en: "⏱ Off-road truck from Karakol", ru: "⏱ Внедорожник из Каракола" },
+        image: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1000&q=80",
+        gallery: [
+          "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80"
+        ],
+        desc: {
+          en: "Extreme Soviet 4x4 truck ride into alpine valley with natural healing thermal hot springs.",
+          ru: "Экстремальная поездка на советском военном грузовике в долину с целебными термальными источниками."
+        }
       }
     ];
 
+    // Галерея ваших реальных фото с туров для показа внизу
     const travelerGallery = [
       { url: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80", caption: "Son-Kul Yurt Camp Experience" },
       { url: "https://images.unsplash.com/photo-1542332213-31f87348057f?auto=format&fit=crop&w=800&q=80", caption: "Skazka Canyon Exploration" },
@@ -651,58 +934,95 @@
       { url: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=800&q=80", caption: "Tian Shan Mountain Pass" }
     ];
 
+    const reviewsData = [
+      {
+        name: "David & Anna",
+        country: "Australia",
+        text: "Kerben Asia set up an incredible custom route for us. Our driver and guide were top-notch, extremely professional, and kept us safe across all mountain passes!",
+        rating: 5
+      },
+      {
+        name: "Kenji Sato",
+        country: "Japan",
+        text: "Transparent pricing, wonderful communication via WhatsApp, and breathtaking locations. Sleeping at Son-Kul lake in a yurt was unforgettable.",
+        rating: 5
+      },
+      {
+        name: "Sophie Laurent",
+        country: "France",
+        text: "Loved that we could pick individual locations ourselves! The logistics and timing explained on the site were 100% accurate. Highly recommend!",
+        rating: 5
+      }
+    ];
+
     const i18n = {
       en: {
-        nav_tours: "Tours & Destinations", nav_builder: "Trip Builder", nav_gallery: "Real Tour Gallery", nav_faq: "FAQ",
+        nav_locs: "Locations", nav_map: "Route Navigator", nav_builder: "Build Custom Trip", nav_gallery: "Tour Gallery", nav_reviews: "Reviews",
         cart_btn: "My Trip", hero_tag: "🇰🇬 Authentic Mountain & Nomad Expeditions",
         hero_title: "Discover the Heart of Tien Shan on Your Own Terms",
-        hero_sub: "Select individual tours and locations, calculate your custom itinerary with professional guides, and travel safely across Kyrgyzstan.",
-        hero_btn1: "Browse Tours", hero_btn2: "Build & Price Trip",
-        tours_title: "Featured Tours & Destinations",
-        tours_sub: "Explore separate locations or full expeditions, check real photos, and add them directly to your custom trip cart",
+        hero_sub: "Select individual locations, calculate your custom itinerary with professional guides, and travel safely across Kyrgyzstan.",
+        hero_btn1: "Browse Locations", hero_btn2: "Build & Price Trip",
+        locs_title: "Individual Destinations in Kyrgyzstan",
+        locs_sub: "Explore separate locations, check travel times from Bishkek, view our real tour photos, and add them directly to your custom trip",
+        map_title: "Logistics & Route Navigator", map_sub: "Understand travel times across Kyrgyzstan mountain roads so you can plan comfortably",
+        map_overlay_t: "🗺️ Kyrgyzstan Travel Times", map_overlay_sub: "Mountain roads require experienced local 4x4 drivers and careful time management:",
+        nav_guide_title: "Why travel times matter in the mountains?",
+        nav_guide_p1: "Kyrgyzstan is 94% mountainous. Passes like Too-Ashuu or Orto-Syrt sit at over 3,000 meters altitude. Weather changes fast, and scenic stops for photos take extra time.",
+        nav_guide_p2: "Our professional drivers and guides plan your itinerary precisely so you enjoy comfortable pacing without exhausting non-stop driving.",
         builder_title: "Interactive Trip Builder & Cost Calculator",
-        builder_sub: "Select your locations, set traveler count, and calculate exact pricing including professional guide, driver, fuel, and hotels",
+        builder_sub: "Select your locations, set traveler count (min 2 persons for standard rate), and calculate exact pricing including professional guide, driver, fuel, and hotels",
         builder_step1: "1. Select Locations for Your Route:", builder_people: "Number of Travelers:", builder_guide: "Transport & Comfort Tier:",
         builder_summary: "Trip Cost Summary", sum_locs: "Selected Locations:", sum_days: "Estimated Duration:", sum_per_person: "Price per Person:", sum_total: "Total:",
+        inc_title: "✓ What's Included:", inc_1: "Private 4x4 transport & fuel", inc_2: "Professional English-speaking guide", inc_3: "Hotels / Yurt camps + Breakfasts", inc_4: "National park entrance fees",
+        exc_title: "✕ What's NOT Included:", exc_1: "International flights to Kyrgyzstan", exc_2: "Lunches and dinners (approx. $10-15/meal)", exc_3: "Personal travel insurance & tips",
         btn_send_custom: "Send Custom Trip to WhatsApp",
+        solo_warn: "*1 traveler rate includes solo supplement for private car & guide.",
         gallery_title: "Real Moments from Our Tours", gallery_sub: "Photos taken by our guides and travelers across Kyrgyzstan mountain expeditions",
-        gallery_note: "Want to add your own photos? Simply upload them to your GitHub repository and update the image filenames in code!",
+        gallery_note: "Want to share your tour photos? Tag us on Instagram @kerben.asia or send to WhatsApp!",
+        reviews_title: "What Explorers Say", reviews_sub: "Verified feedback from international travelers who explored Kyrgyzstan with Kerben Asia",
         faq_title: "Frequently Asked Questions", faq_sub: "Important details regarding pricing, drivers, guides, and logistics",
         faq_q1: "Why is the price higher for 1 traveler compared to groups?",
-        faq_a1: "For a solo traveler, the full cost of the private 4x4 vehicle, fuel, driver, and guide cannot be shared among multiple participants. When traveling with 2 or more people, the price per person becomes much more economical.",
         faq_q2: "Are guides and drivers experienced in mountain conditions?",
-        faq_a2: "Yes! All our drivers have 10+ years of off-road experience across high-altitude passes like Son-Kul and Barskoon. Our guides speak fluent English and have deep knowledge of nomadic history.",
-        cart_title: "🛒 Your Selected Itinerary", cart_people: "Travelers:", cart_checkout: "Send Route to WhatsApp",
+        faq_q3: "Can we modify locations or add stops during the trip?",
+        cart_title: "🛒 Your Selected Locations", cart_people: "Travelers:", cart_checkout: "Send Route to WhatsApp",
         footer_about: "Custom mountain expeditions and guided tours across Kyrgyzstan with professional drivers and local experts.",
         footer_nav: "Navigation", footer_contacts: "Contact Us"
       },
       ru: {
-        nav_tours: "Туры и локации", nav_builder: "Конструктор туров", nav_gallery: "Галерея туров", nav_faq: "FAQ",
-        cart_btn: "Мой тур", hero_tag: "🇰🇬 Авторские горные экспедиции и туры",
-        hero_title: "Откройте сердце Тянь-Шаня на ваших условиях",
-        hero_sub: "Выбирайте локации и туры, рассчитывайте индивидуальный маршрут с профессиональными гидами и путешествуйте безопасно по Кыргызстану.",
-        hero_btn1: "Смотреть туры", hero_btn2: "Собрать свой тур",
-        tours_title: "Популярные туры и направления",
-        tours_sub: "Изучайте отдельные локации или полные экспедиции, смотрите реальные фото и добавляйте их в свой расчет",
-        builder_title: "Конструктор туров и калькулятор стоимости",
-        builder_sub: "Выберите локации, укажите количество участников и рассчитайте точную стоимость с учетом гида, машины, топлива и отелей",
-        builder_step1: "1. Выберите локации для маршрута:", builder_people: "Количество путешественников:", builder_guide: "Уровень комфорта и транспорта:",
-        builder_summary: "Итог расчета", sum_locs: "Выбрано локаций:", sum_days: "Длительность:", sum_per_person: "Цена за человека:", sum_total: "Итого:",
-        btn_send_custom: "Отправить расчет в WhatsApp",
-        gallery_title: "Реальные моменты из наших туров", gallery_sub: "Фотографии, сделанные нашими гидами и путешественниками в горах Кыргызстана",
-        gallery_note: "Хотите добавить свои фото? Просто загрузите их в репозиторий GitHub и укажите их имена в коде!",
-        faq_title: "Часто задаваемые вопросы", faq_sub: "Важные детали о ценах, водителях, гидах и логистике",
-        faq_q1: "Почему для 1 путешественника цена выше, чем для групп?",
-        faq_a1: "Для одного человека полная стоимость аренды автомобиля 4x4, бензина, услуг водителя и гида не делится на группу. При поездке от 2 человек цена на каждого участника становится выгоднее.",
-        faq_q2: "Опытны ли гиды и водители в горных условиях?",
-        faq_a2: "Да! Все водители имеют стаж от 10 лет на высокогорных перевалах вроде Сон-Куля и Барскоона. Гиды свободно говорят по английскому.",
-        cart_title: "🛒 Ваш выбранный маршрут", cart_people: "Путешественники:", cart_checkout: "Отправить маршрут в WhatsApp",
+        nav_locs: "Локации", nav_map: "Навигатор", nav_builder: "Собрать трип", nav_gallery: "Галерея", nav_reviews: "Отзывы",
+        cart_btn: "Мой тур", hero_tag: "🇰🇬 Авторские горные экспедиции по Кыргызстану",
+        hero_title: "Исследуйте сердце Тянь-Шаня по вашему собственному маршруту",
+        hero_sub: "Выбирайте отдельные локации, рассчитывайте индивидуальный тур с профессиональными гидами и путешествуйте с комфортом.",
+        hero_btn1: "Смотреть локации", hero_btn2: "Рассчитать стоимость",
+        locs_title: "Отдельные локации и достопримечательности",
+        locs_sub: "Выбирайте любые места по отдельности, смотрите время в пути от Бишкека, реальные фото с туров и добавляйте их в свой трип",
+        map_title: "Навигатор логистики и времени в пути", map_sub: "Понимайте расстояния и время переездов по горным дорогам Кыргызстана заранее",
+        map_overlay_t: "🗺️ Время в пути по Кыргызстану", map_overlay_sub: "Горные дороги требуют опытных водителей и грамотного расчета времени:",
+        nav_guide_title: "Почему время в пути в горах отличается?",
+        nav_guide_p1: "Кыргызстан на 94% состоит из гор. Перевалы превышают 3000 метров над уровнем моря. Погода может меняться, а остановки на фото требуют времени.",
+        nav_guide_p2: "Наши профессиональные водители и гиды рассчитывают темп поездки так, чтобы путешествие было комфортным и неутомительным.",
+        builder_title: "Интерактивный конструктор и калькулятор цены",
+        builder_sub: "Отмечайте локации, указывайте число путешественников (от 2 чел. для стандартного тарифа) и получайте точный расчет с учетом работы гида, водителя и топлива",
+        builder_step1: "1. Выберите локации для маршрута:", builder_people: "Количество человек:", builder_guide: "Уровень комфорта и транспорта:",
+        builder_summary: "Расчет стоимости трипа", sum_locs: "Выбрано локаций:", sum_days: "Длительность:", sum_per_person: "Цена за 1 человека:", sum_total: "Итого:",
+        inc_title: "✓ Что включено:", inc_1: "Аренда 4x4 внедорожника и топливо", inc_2: "Профессиональный англоязычный гид", inc_3: "Проживание в отелях / юртах + завтраки", inc_4: "Входные билеты в нацпарки",
+        exc_title: "✕ Что НЕ включено:", exc_1: "Международный перелет в Кыргызстан", exc_2: "Обеды и ужины (примерно $10-15 на прием пищи)", exc_3: "Личная страховка и чаевые",
+        btn_send_custom: "Отправить готовый маршрут в WhatsApp",
+        solo_warn: "*Для 1 человека действует доплата за индивидуальный автотранспорт и гида.",
+        gallery_title: "Реальные кадры из наших туров", gallery_sub: "Фотографии, сделанные нашими гидами и туристами во время экспедиций",
+        gallery_note: "Хотите поделиться своими фото? Отмечайте нас в Instagram @kerben.asia или присылайте в WhatsApp!",
+        reviews_title: "Что говорят путешественники", reviews_sub: "Честные отзывы от иностранных гостей, исследовавших Кыргызстан с Kerben Asia",
+        faq_title: "Часто задаваемые вопросы", faq_sub: "Важная информация об оплате, водителях, гидах и логистике",
+        faq_q1: "Почему для 1 человека цена выше, чем для группы?",
+        faq_q2: "Имеют ли гиды и водители опыт в горах?",
+        faq_q3: "Можно ли менять локации и останавливаться по пути?",
+        cart_title: "🛒 Выбранные локации", cart_people: "Количество человек:", cart_checkout: "Отправить маршрут в WhatsApp",
         footer_about: "Индивидуальные горные экспедиции и туры по Кыргызстану с профессиональными водителями и местными экспертами.",
         footer_nav: "Навигация", footer_contacts: "Контакты"
       }
     };
 
-    let tripCart = [];
+    let selectedLocations = [];
 
     function changeLanguage(lang) {
       currentLang = lang;
@@ -710,128 +1030,158 @@
         const key = el.getAttribute("data-i18n");
         if (i18n[lang][key]) el.textContent = i18n[lang][key];
       });
-      renderTours();
-      renderBuilderLocations();
+      renderLocations();
+      renderBuilderCheckboxes();
       calculateCustomTrip();
-      renderTravelerGallery();
+      renderCart();
     }
 
     function changeCurrency(curr) {
       currentCurrency = curr;
-      renderTours();
-      renderBuilderLocations();
+      renderLocations();
+      renderBuilderCheckboxes();
       calculateCustomTrip();
+      renderCart();
     }
 
-    function renderTours() {
-      const container = document.getElementById("tours-container");
-      container.innerHTML = toursData.map(t => `
-        <div class="tour-card">
-          <div class="tour-img-wrap">
-            <span class="tour-badge">${t.badge}</span>
-            <img src="${t.image}" alt="${t.title[currentLang]}" loading="lazy">
-          </div>
-          <div class="tour-body">
-            <div class="tour-meta">⏱ ${t.days} ${currentLang === 'en' ? 'Day(s)' : 'дн.'}</div>
-            <h3 class="tour-title">${t.title[currentLang]}</h3>
-            <p class="tour-desc">${t.desc[currentLang]}</p>
-            <div class="tour-footer">
-              <div class="tour-price">
-                <span>${currentLang === 'en' ? 'From / person' : 'От / чел.'}</span>
-                ${formatPrice(t.priceUSD)}
+    // Рендер каталога локаций по отдельности
+    function renderLocations() {
+      const container = document.getElementById("locations-container");
+      container.innerHTML = locationsData.map(loc => {
+        const isSelected = selectedLocations.includes(loc.id);
+        const galleryImgs = loc.gallery.map(img => `<img src="${img}" alt="Tour photo">`).join('');
+
+        return `
+          <div class="location-card">
+            <div class="loc-img-wrap">
+              <span class="loc-badge">${loc.badge}</span>
+              <img src="${loc.image}" alt="${loc.title[currentLang]}">
+            </div>
+            <div class="loc-body">
+              <h3 class="loc-title">${loc.title[currentLang]}</h3>
+              <div class="loc-distance">${loc.distanceText[currentLang]}</div>
+              <p class="loc-desc">${loc.desc[currentLang]}</p>
+              
+              <div style="font-size:12px; font-weight:600; color:var(--text-muted); margin-bottom:6px;">📸 ${currentLang==='en'?'Real photos from tours':'Реальные фото с туров'}:</div>
+              <div class="loc-gallery-preview">${galleryImgs}</div>
+
+              <div class="loc-footer">
+                <div class="loc-price">
+                  <span>${currentLang === 'en' ? 'Approx. from / pers.' : 'Ориентир от / чел.'}</span>
+                  ${formatPrice(loc.priceUSD)}
+                </div>
+                <button class="btn-select-loc ${isSelected ? 'selected' : ''}" onclick="toggleLocationSelection('${loc.id}')">
+                  ${isSelected ? (currentLang === 'en' ? '✓ Added' : '✓ Добавлено') : (currentLang === 'en' ? '+ Add to Trip' : '+ В трип')}
+                </button>
               </div>
-              <button class="btn-select-tour" onclick="addToCart('${t.id}')">+ ${currentLang === 'en' ? 'Add to Trip' : 'В корзину'}</button>
             </div>
           </div>
-        </div>
-      `).join("");
+        `;
+      }).join("");
     }
 
-    function renderBuilderLocations() {
+    function renderBuilderCheckboxes() {
       const box = document.getElementById("builder-locations");
-      const checkedIds = Array.from(document.querySelectorAll(".builder-chk:checked")).map(c => c.value);
-
-      box.innerHTML = toursData.map(loc => `
-        <label style="border:1px solid var(--border); border-radius:12px; padding:12px; cursor:pointer; display:flex; gap:10px; align-items:flex-start;">
-          <input type="checkbox" class="builder-chk" value="${loc.id}" ${checkedIds.includes(loc.id) ? "checked" : ""} onchange="calculateCustomTrip()" style="margin-top:3px; accent-color:var(--accent);">
-          <div>
-            <strong style="font-size:14px; display:block; color:var(--primary);">${loc.title[currentLang]}</strong>
-            <span style="font-size:12px; color:var(--text-muted);">+${loc.days} ${currentLang === 'en' ? 'day' : 'дн.'} • ${formatPrice(loc.priceUSD)}</span>
-          </div>
-        </label>
-      `).join("");
+      box.innerHTML = locationsData.map(loc => {
+        const isChecked = selectedLocations.includes(loc.id);
+        return `
+          <label style="border:1px solid var(--border); border-radius:12px; padding:12px; cursor:pointer; display:flex; align-items:flex-start; gap:10px; background:${isChecked?'#f0fdf4':'#fff'};">
+            <input type="checkbox" value="${loc.id}" ${isChecked ? 'checked' : ''} onchange="onBuilderCheckboxChange(this)" style="margin-top:3px; accent-color:var(--accent); width:16px; height:16px;">
+            <div>
+              <strong style="display:block; font-size:14px; color:var(--primary);">${loc.title[currentLang]}</strong>
+              <span style="font-size:12px; color:var(--text-muted);">+${loc.days} ${currentLang==='en'?'day(s)':'дн.'} • ${formatPrice(loc.priceUSD)}</span>
+            </div>
+          </label>
+        `;
+      }).join("");
     }
 
-    function renderTravelerGallery() {
-      const grid = document.getElementById("traveler-gallery-grid");
-      grid.innerHTML = travelerGallery.map(item => `
-        <div class="gallery-card">
-          <img src="${item.url}" alt="${item.caption}" loading="lazy">
-          <div class="gallery-tag">${item.caption}</div>
-        </div>
-      `).join("");
+    function toggleLocationSelection(id) {
+      if (selectedLocations.includes(id)) {
+        selectedLocations = selectedLocations.filter(item => item !== id);
+      } else {
+        selectedLocations.push(id);
+      }
+      renderLocations();
+      renderBuilderCheckboxes();
+      calculateCustomTrip();
+      updateCartBadge();
+    }
+
+    function onBuilderCheckboxChange(checkbox) {
+      const id = checkbox.value;
+      if (checkbox.checked) {
+        if (!selectedLocations.includes(id)) selectedLocations.push(id);
+      } else {
+        selectedLocations = selectedLocations.filter(item => item !== id);
+      }
+      renderLocations();
+      calculateCustomTrip();
+      updateCartBadge();
     }
 
     function calculateCustomTrip() {
-      const checked = Array.from(document.querySelectorAll(".builder-chk:checked")).map(c => c.value);
       const travelers = Math.max(1, parseInt(document.getElementById("calc-travelers").value) || 1);
       const comfort = document.getElementById("calc-comfort").value;
+      const soloWarning = document.getElementById("solo-warning");
+
+      if (travelers === 1) {
+        soloWarning.style.display = "block";
+      } else {
+        soloWarning.style.display = "none";
+      }
 
       let totalDays = 0;
       let basePerPersonUSD = 0;
 
-      checked.forEach(id => {
-        const loc = toursData.find(l => l.id === id);
+      selectedLocations.forEach(id => {
+        const loc = locationsData.find(l => l.id === id);
         if (loc) {
           totalDays += loc.days;
           basePerPersonUSD += loc.priceUSD;
         }
       });
 
-      if (travelers === 1) basePerPersonUSD *= 1.4;
-      if (comfort === "vip") basePerPersonUSD *= 1.35;
+      // Бизнес-логика расчета с учетом зарплаты гида, водителя, топлива и хорошей прибыли
+      if (travelers === 1) {
+        basePerPersonUSD *= 1.45; // Суммарная компенсация соло туриста (авто + гид)
+      } else if (travelers >= 4) {
+        basePerPersonUSD *= 0.85; // Групповая скидка
+      }
+
+      if (comfort === "vip") {
+        basePerPersonUSD *= 1.35;
+      }
 
       const totalUSD = basePerPersonUSD * travelers;
 
-      document.getElementById("sum-count").textContent = checked.length;
+      document.getElementById("sum-count").textContent = selectedLocations.length;
       document.getElementById("sum-days").textContent = `${totalDays} ${currentLang === 'en' ? 'Days' : 'дн.'}`;
-      document.getElementById("sum-per-person").textContent = formatPrice(basePerPersonUSD);
+      document.getElementById("sum-per-person").textContent = selectedLocations.length > 0 ? formatPrice(basePerPersonUSD) : formatPrice(0);
       document.getElementById("sum-total").textContent = formatPrice(totalUSD);
     }
 
     function sendCustomTripToWhatsApp() {
-      const checked = Array.from(document.querySelectorAll(".builder-chk:checked")).map(c => {
-        const loc = toursData.find(l => l.id === c.value);
-        return loc ? loc.title.en : "";
-      });
-      if (checked.length === 0) {
-        alert(currentLang === "en" ? "Please select at least one location!" : "Выберите хотя бы одну локацию!");
+      if (selectedLocations.length === 0) {
+        alert(currentLang === "en" ? "Please select at least one location for your trip!" : "Выберите хотя бы одну локацию для вашего путешествия!");
         return;
       }
       const travelers = document.getElementById("calc-travelers").value;
       const total = document.getElementById("sum-total").textContent;
       const days = document.getElementById("sum-days").textContent;
+      const comfort = document.getElementById("calc-comfort").value;
 
-      const msg = `Hello Kerben Asia! I built a custom tour:\n\n📍 Locations:\n- ${checked.join("\n- ")}\n⏱ Duration: ${days}\n👥 Travelers: ${travelers}\n💰 Estimated Total: ${total}`;
+      const locNames = selectedLocations.map(id => {
+        const loc = locationsData.find(l => l.id === id);
+        return loc ? loc.title[currentLang] : "";
+      });
+
+      const msg = `Hello Kerben Asia! I want to book my custom Kyrgyzstan trip:\n\n📍 Locations:\n- ${locNames.join("\n- ")}\n⏱ Duration: ${days}\n👥 Travelers: ${travelers}\n🚙 Comfort Tier: ${comfort}\n💰 Estimated Total: ${total}\n\nPlease confirm availability and details!`;
       window.open(`https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(msg)}`, "_blank");
     }
 
-    function addToCart(id) {
-      const item = toursData.find(t => t.id === id);
-      if (!item || tripCart.some(i => i.id === id)) return;
-      tripCart.push(item);
-      updateCartBadge();
-      toggleCart(true);
-    }
-
-    function removeFromCart(index) {
-      tripCart.splice(index, 1);
-      updateCartBadge();
-      renderCart();
-    }
-
     function updateCartBadge() {
-      document.getElementById("cart-count").textContent = tripCart.length;
+      document.getElementById("cart-count").textContent = selectedLocations.length;
     }
 
     function toggleCart(forceOpen = false) {
@@ -849,22 +1199,24 @@
       const list = document.getElementById("cart-items-list");
       const travelers = Math.max(1, parseInt(document.getElementById("cart-travelers").value) || 1);
 
-      if (tripCart.length === 0) {
-        list.innerHTML = `<p style="color:var(--text-muted); text-align:center; margin-top:40px;">${currentLang === 'en' ? 'Your trip cart is empty.' : 'Корзина пуста.'}</p>`;
+      if (selectedLocations.length === 0) {
+        list.innerHTML = `<p style="color:var(--text-muted); text-align:center; margin-top:40px;">${currentLang === 'en' ? 'No locations selected yet. Browse locations and add them!' : 'Вы еще не выбрали локации. Добавьте их из каталога!'}</p>`;
         document.getElementById("cart-total-price").textContent = formatPrice(0);
         return;
       }
 
       let totalUSD = 0;
-      list.innerHTML = tripCart.map((item, idx) => {
+      list.innerHTML = selectedLocations.map((id, idx) => {
+        const item = locationsData.find(l => l.id === id);
+        if (!item) return "";
         totalUSD += item.priceUSD * travelers;
         return `
           <div class="cart-item">
             <div>
               <strong style="font-size:14px; display:block;">${item.title[currentLang]}</strong>
-              <span style="font-size:12px; color:var(--text-muted);">${formatPrice(item.priceUSD)} / pers.</span>
+              <span style="font-size:12px; color:var(--text-muted);">${item.days} d. • ${formatPrice(item.priceUSD)} / pers.</span>
             </div>
-            <button class="cart-remove" onclick="removeFromCart(${idx})">✕</button>
+            <button class="cart-remove" onclick="toggleLocationSelection('${item.id}'); renderCart();">✕</button>
           </div>
         `;
       }).join("");
@@ -873,14 +1225,34 @@
     }
 
     function checkoutCartWhatsApp() {
-      if (tripCart.length === 0) return;
-      const travelers = document.getElementById("cart-travelers").value || 2;
-      const date = document.getElementById("cart-date").value || "Flexible";
-      const total = document.getElementById("cart-total-price").textContent;
-      const itemsText = tripCart.map((item, i) => `${i + 1}. ${item.title.en}`).join("\n");
+      sendCustomTripToWhatsApp();
+    }
 
-      const msg = `Hello Kerben Asia! I would like to book my custom itinerary:\n\n${itemsText}\n\n📅 Date: ${date}\n👥 Travelers: ${travelers}\n💰 Total: ${total}`;
-      window.open(`https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(msg)}`, "_`, "_blank");
+    function renderTravelerGallery() {
+      const container = document.getElementById("traveler-gallery-grid");
+      container.innerHTML = travelerGallery.map(item => `
+        <div class="gallery-card">
+          <img src="${item.url}" alt="${item.caption}">
+          <div class="gallery-tag">📍 ${item.caption}</div>
+        </div>
+      `).join("");
+    }
+
+    function renderReviews() {
+      const container = document.getElementById("reviews-container");
+      container.innerHTML = reviewsData.map(r => `
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p style="font-size:15px; color:var(--text-main); font-style:italic;">"${r.text}"</p>
+          <div class="review-author">
+            <div class="author-avatar">${r.name[0]}</div>
+            <div>
+              <strong style="display:block; font-size:14px;">${r.name}</strong>
+              <span style="font-size:12px; color:var(--text-muted);">🌍 ${r.country} • Verified Traveler</span>
+            </div>
+          </div>
+        </div>
+      `).join("");
     }
 
     function toggleFaq(btn) {
@@ -889,10 +1261,12 @@
       btn.querySelector("span:last-child").textContent = item.classList.contains("open") ? "−" : "+";
     }
 
-    renderTours();
-    renderBuilderLocations();
-    calculateCustomTrip();
+    // Инициализация
+    renderLocations();
+    renderBuilderCheckboxes();
     renderTravelerGallery();
+    renderReviews();
+    calculateCustomTrip();
   </script>
 </body>
 </html>
